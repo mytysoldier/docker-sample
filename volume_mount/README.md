@@ -9,5 +9,10 @@ docker volume create mysqlvolume
 docker run --name db01 -dit -v mysqlvolume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mypassword mysql:5.7
 ```
 
+- `--mount`オプションを使った書き方。（こちらが推奨されている）
+```
+docker run --name db01 -dit --mount type=volume,src=mysqlvolume,dst=/var/lib/mysql -e MYSQL_ROOT_PASSWORD=mypassword mysql:5.7
+```
+
 ### バインドマウントよりボリュームマウントを選ぶ場面
 - Dockerコンテナが扱うデータをブラックボックスとして扱い、コンテナを破棄してもデータが残るようにしたい場合(例：データベースのデータ)
